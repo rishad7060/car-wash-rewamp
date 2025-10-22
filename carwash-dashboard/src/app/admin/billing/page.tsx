@@ -1,9 +1,8 @@
-import { AdminLayout } from "@/components/admin-layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function BillingPage() {
   return (
-    <AdminLayout>
+    <>
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Billing</h1>
@@ -24,6 +23,6 @@ export default function BillingPage() {
           </CardContent>
         </Card>
       </div>
-    </AdminLayout>
+    </>
   );
 }
