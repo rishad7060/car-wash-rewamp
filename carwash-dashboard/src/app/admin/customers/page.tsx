@@ -1,11 +1,34 @@
+'use client'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { CustomerForm } from "@/components/ui/customer-form";
+import { AddCustomerForm } from "@/components/ui/add-customer-form";
 import { customers } from "@/data/customers";
+import { useState } from "react";
+
+interface CustomerData {
+  name: string;
+  mobile: string;
+  address: string;
+  serviceType: string;
+  subscriptionPlan: string;
+  frequency: string;
+  preferredDays: string[];
+  preferredTime: string;
+  status: string;
+}
 
 export default function CustomersPage() {
-  const handleCustomerSubmit = (customerData: any) => {
+  const [customerList, setCustomerList] = useState(customers);
+
+  const handleCustomerSubmit = (customerData: CustomerData) => {
     console.log("New customer data:", customerData);
-    // In a real implementation, this would save to backend
+
+    // Add customer to the list with a new ID
+    const newCustomer = {
+      ...customerData,
+      id: `c${Date.now()}`,
+    };
+
+    setCustomerList(prev => [...prev, newCustomer]);
     alert(`Customer ${customerData.name} added with ${customerData.subscriptionPlan}`);
   };
 
@@ -20,14 +43,14 @@ export default function CustomersPage() {
         <div className="lg:col-span-2">
           <Card>
             <CardHeader>
-              <CardTitle>Existing Customers</CardTitle>
+              <CardTitle>Existing Customers ({customerList.length})</CardTitle>
               <CardDescription>
                 View and manage current customer subscriptions
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {customers.map((customer) => (
+                {customerList.map((customer) => (
                   <div key={customer.id} className="p-4 border rounded-lg">
                     <div className="flex justify-between items-start">
                       <div>
@@ -52,7 +75,7 @@ export default function CustomersPage() {
         </div>
 
         <div className="lg:col-span-1">
-          <CustomerForm onSubmit={handleCustomerSubmit} />
+          <AddCustomerForm onSubmit={handleCustomerSubmit} />
         </div>
       </div>
     </div>

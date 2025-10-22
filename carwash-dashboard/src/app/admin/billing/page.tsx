@@ -20,19 +20,17 @@ export default function BillingPage() {
   };
 
   return (
-    <>
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Billing</h1>
-          <p className="text-gray-600">Manage invoices and payment processing</p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {invoiceList.map((invoice) => (
-            <InvoiceCard key={invoice.id} invoice={invoice} />
-          ))}
-        </div>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900">Billing</h1>
+        <p className="text-gray-600">Manage invoices and payment processing</p>
       </div>
-    </>
+
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {invoiceList.map((invoice) => (
+          <InvoiceCard key={invoice.id} invoice={invoice} />
+        ))}
+      </div>
+    </div>
   );
 }
